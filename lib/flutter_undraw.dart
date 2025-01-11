@@ -104,9 +104,7 @@ class _UndrawState extends State<Undraw> {
       context,
     ).loadString("packages/flutter_undraw/${illustration.path}");
 
-    String valueString = (widget.color.value ?? widget.color.toARGB32())
-        .toRadixString(16)
-        .substring(2);
+    String valueString = widget.color.value.toRadixString(16).substring(2);
     return image.replaceAll("#6c63ff", "#$valueString");
   }
 
