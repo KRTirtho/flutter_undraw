@@ -28,7 +28,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: UnDraw(
+        child: Undraw(
           illustration: UndrawIllustration.bugFixing,
           color: Colors.red,
         ),

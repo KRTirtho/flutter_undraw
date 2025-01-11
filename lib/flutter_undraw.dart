@@ -6,8 +6,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import './src/collection/undraw_illustration.dart';
 export './src/collection/undraw_illustration.dart';
 
-class UnDraw extends StatefulWidget {
-  const UnDraw({
+class Undraw extends StatefulWidget {
+  const Undraw({
     super.key,
     required this.illustration,
     this.color = const Color(0xFF6C63FF),
@@ -92,10 +92,10 @@ class UnDraw extends StatefulWidget {
   final bool useMemCache;
 
   @override
-  State<UnDraw> createState() => _UnDrawState();
+  State<Undraw> createState() => _UndrawState();
 }
 
-class _UnDrawState extends State<UnDraw> {
+class _UndrawState extends State<Undraw> {
   Future<String> renderIllustration(
     BuildContext context,
     UndrawIllustration illustration,
@@ -119,7 +119,7 @@ class _UnDrawState extends State<UnDraw> {
   }
 
   @override
-  void didUpdateWidget(covariant UnDraw oldWidget) {
+  void didUpdateWidget(covariant Undraw oldWidget) {
     super.didUpdateWidget(oldWidget);
 
     if (oldWidget.illustration != widget.illustration) {

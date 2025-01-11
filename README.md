@@ -1,39 +1,44 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Undraw.co for Flutter
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+A Flutter package to use [undraw.co](https://undraw.co) illustrations in your app. With also the ability to change the color of the illustrations.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
+## Getting Started
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+Run the following command:
 
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+```bash
+flutter pub add flutter_undraw
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
 ```dart
-const like = 'sample';
+import 'package:flutter_undraw/flutter_undraw.dart';
+
+class MyWidget extends StatelessWidget {
+  const MyWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Undraw(
+          illustration: UndrawIllustration.bugFixing,
+          color: Colors.red,
+        ),
+      ),
+    );
+  }
+}
+
 ```
 
-## Additional information
+## License
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+[MIT](./LICENSE)
+
+> NB: This package is not affiliated with undraw.co. Every illustration is Licensed by undraw.co.
+> This library only provides a way to use the illustrations in your Flutter app. So, we won't be
+> responsible for any misuse of the illustrations' license.
+> 
+> Although these illustrations are also MIT licensed.
