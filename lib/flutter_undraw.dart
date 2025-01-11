@@ -6,7 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import './src/collection/undraw_illustration.dart';
 export './src/collection/undraw_illustration.dart';
 
-class UnDraw extends StatelessWidget {
+class UnDraw extends StatefulWidget {
   const UnDraw({
     super.key,
     required this.illustration,
@@ -90,7 +90,13 @@ class UnDraw extends StatelessWidget {
 
   /// If cache image in memory, if enable reload the same illustration is be more fast
   final bool useMemCache;
-  Future<SvgPicture> renderIllustration(
+
+  @override
+  State<UnDraw> createState() => _UnDrawState();
+}
+
+class _UnDrawState extends State<UnDraw> {
+  Future<String> renderIllustration(
     BuildContext context,
     UndrawIllustration illustration,
   ) async {
@@ -98,37 +104,55 @@ class UnDraw extends StatelessWidget {
       context,
     ).loadString("packages/flutter_undraw/${illustration.path}");
 
-    String valueString = (color.value ?? color.toARGB32())
+    String valueString = (widget.color.value ?? widget.color.toARGB32())
         .toRadixString(16)
         .substring(2);
-    image = image.replaceAll("#6c63ff", "#$valueString");
-    return SvgPicture.string(
-      image,
-      height: height,
-      width: width,
-      alignment: alignment,
-      colorFilter: colorFilter,
-      fit: fit,
-      semanticsLabel: semanticLabel,
-    );
+    return image.replaceAll("#6c63ff", "#$valueString");
+  }
+
+  late Future<String> illustrationFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    illustrationFuture = renderIllustration(context, widget.illustration);
+  }
+
+  @override
+  void didUpdateWidget(covariant UnDraw oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.illustration != widget.illustration) {
+      illustrationFuture = renderIllustration(context, widget.illustration);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: renderIllustration(context, illustration),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
+    return FutureBuilder<String>(
+      future: illustrationFuture,
+      builder: (BuildContext context, snapshot) {
         if (snapshot.hasData) {
           return Container(
-            padding: padding ?? EdgeInsets.all(16),
-            child: snapshot.data,
+            padding: widget.padding ?? EdgeInsets.all(16),
+            child: SvgPicture.string(
+              snapshot.data!,
+              height: widget.height,
+              width: widget.width,
+              alignment: widget.alignment,
+              colorFilter: widget.colorFilter,
+              fit: widget.fit,
+              semanticsLabel: widget.semanticLabel,
+            ),
           );
         } else if (snapshot.hasError) {
           return Center(
-            child: errorWidget ?? Text('Could not load illustration!'),
+            child: widget.errorWidget ?? Text('Could not load illustration!'),
           );
         } else {
-          return Center(child: placeholder ?? CircularProgressIndicator());
+          return Center(
+            child: widget.placeholder ?? CircularProgressIndicator(),
+          );
         }
       },
     );
