@@ -1,3 +1,10 @@
+# 0.2.1 (2025-01-12)
+
+## Changes
+
+**Features**
+- feat: add working image preview in IDE autocomplete
+
 # 0.2.0+1 (2025-01-12)
 
 ## Changes
