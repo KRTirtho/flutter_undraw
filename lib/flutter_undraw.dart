@@ -1,5 +1,6 @@
 library;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -144,6 +145,22 @@ class _UndrawState extends State<Undraw> {
             ),
           );
         } else if (snapshot.hasError) {
+          if (kDebugMode &&
+              snapshot.error is FlutterError &&
+              (snapshot.error as FlutterError)
+                  .message
+                  .contains('Unable to load asset: ') &&
+              widget.errorWidget == null) {
+            return Center(
+              child: SelectableText(
+                'Illustration not found in the AssetBundle.\n'
+                'Did you forget to add \n'
+                '/packages/flutter_undraw/${widget.illustration.path}\n'
+                'in your pubspec.yaml file\'s assets?',
+              ),
+            );
+          }
+
           return Center(
             child: widget.errorWidget ?? Text('Could not load illustration!'),
           );

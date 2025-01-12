@@ -20,7 +20,3 @@ dev_dependencies:
   path: ^1.9.1
   change_case: ^2.2.0
   num_to_words: ^1.1.0
-
-flutter:
-  assets:
-    - assets/undraw/
