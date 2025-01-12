@@ -45,7 +45,7 @@ For the sake of treeshaking and saving space, the illustrations you use, must al
 ```yaml
 flutter:
   assets:
-    - packages/flutter_undraw/assets/illustrations/bug_fixing.svg
+    - packages/flutter_undraw/assets/undraw/bug_fixing.svg
 ```
 
 Usually, the illustration file names are the same as the enum values but in snake case. If you can't guess it, you can
@@ -56,7 +56,7 @@ them one by one.
 ```yaml
 flutter:
   assets:
-    - packages/flutter_undraw/assets/illustrations/
+    - packages/flutter_undraw/assets/undraw//
 ```
 
 ## License
