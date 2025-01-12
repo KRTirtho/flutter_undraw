@@ -1,3 +1,10 @@
+# 0.2.0+1 (2025-01-12)
+
+## Changes
+
+- Docs svg path is invalid
+- Doc comment contains asset path
+
 # 0.2.0 (2025-01-12)
 
 ## Changes

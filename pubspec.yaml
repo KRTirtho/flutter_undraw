@@ -1,6 +1,6 @@
 name: flutter_undraw
 description: Undraw.co Illustrations for Flutter with customization options
-version: 0.2.0
+version: 0.2.0+1
 homepage: https://github.com/KRTirtho/flutter_undraw
 
 environment:

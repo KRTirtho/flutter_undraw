@@ -156,7 +156,7 @@ class _UndrawState extends State<Undraw> {
               child: SelectableText(
                 'Illustration not found in the AssetBundle.\n'
                 'Did you forget to add \n'
-                '/packages/flutter_undraw/${widget.illustration.path}\n'
+                'packages/flutter_undraw/${widget.illustration.path}\n'
                 'in your pubspec.yaml file\'s assets?',
               ),
             );

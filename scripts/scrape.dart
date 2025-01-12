@@ -84,12 +84,11 @@ void main(List<String> args) async {
     return parse(response.body);
   });
 
-  final pagination =
-      rootPage
-          .querySelector(
-            "#__next > div.flex.items-center.justify-center.gap-2.mb-12 > span",
-          )
-          ?.text;
+  final pagination = rootPage
+      .querySelector(
+        "#__next > div.flex.items-center.justify-center.gap-2.mb-12 > span",
+      )
+      ?.text;
 
   if (pagination == null) {
     throw Exception("The selector for pagination has been changed");
@@ -114,11 +113,10 @@ void main(List<String> args) async {
 
   stdout.writeln("🟢 Scraped illustrations");
 
-  final illustrations =
-      allPages
-          .map((page) => page["props"]["pageProps"]["illustrations"])
-          .expand((element) => element)
-          .toList();
+  final illustrations = allPages
+      .map((page) => page["props"]["pageProps"]["illustrations"])
+      .expand((element) => element)
+      .toList();
 
   final generatedLines = [
     "/// Generated file. Do not edit.",
@@ -147,7 +145,7 @@ void main(List<String> args) async {
 
     names.add(name);
 
-    final file = File("assets/undraw/$name.svg");
+    final file = File("lib/assets/undraw/$name.svg");
 
     if (!await file.exists()) {
       stdout.writeln("🟡 Downloading svg $name");
@@ -160,8 +158,11 @@ void main(List<String> args) async {
 
     generatedLines.add(
       "/// `$name`: ${illustration["title"]}\n"
+      "///\n"
+      "/// asset path: `packages/flutter_undraw/${file.path.replaceAll("lib/", "")}`\n"
+      "///\n"
       "/// <img src='${illustration["media"]}' alt='$name' width='200'/>\n"
-      "${name.toCamelCase()}('${file.path}')${illustrations.last == illustration ? ';' : ','}",
+      "${name.toCamelCase()}('${file.path.replaceAll("lib/", "")}')${illustrations.last == illustration ? ';' : ','}",
     );
   }
 
