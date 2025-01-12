@@ -161,7 +161,7 @@ void main(List<String> args) async {
       "///\n"
       "/// asset path: `packages/flutter_undraw/${file.path.replaceAll("lib/", "")}`\n"
       "///\n"
-      "/// <img src='${illustration["media"]}' alt='$name' width='200'/>\n"
+      "/// <img src='https://corsproxy.io/?url=${illustration["media"]}' alt='$name' width='200'/>\n"
       "${name.toCamelCase()}('${file.path.replaceAll("lib/", "")}')${illustrations.last == illustration ? ';' : ','}",
     );
   }
