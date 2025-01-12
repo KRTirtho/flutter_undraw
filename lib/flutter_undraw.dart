@@ -2,6 +2,7 @@ library;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
 
 import './src/collection/undraw_illustration.dart';
@@ -99,11 +100,10 @@ class Undraw extends StatefulWidget {
 class _UndrawState extends State<Undraw> {
   Future<String> renderIllustration(
     BuildContext context,
-    UndrawIllustration illustration,
   ) async {
     String image = await DefaultAssetBundle.of(
       context,
-    ).loadString("packages/flutter_undraw/${illustration.path}");
+    ).loadString("packages/flutter_undraw/${widget.illustration.path}");
 
     String valueString = widget.color.value.toRadixString(16).substring(2);
     return image.replaceAll("#6c63ff", "#$valueString");
@@ -114,15 +114,16 @@ class _UndrawState extends State<Undraw> {
   @override
   void initState() {
     super.initState();
-    illustrationFuture = renderIllustration(context, widget.illustration);
+    illustrationFuture = renderIllustration(context);
   }
 
   @override
   void didUpdateWidget(covariant Undraw oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (oldWidget.illustration != widget.illustration) {
-      illustrationFuture = renderIllustration(context, widget.illustration);
+    if (oldWidget.illustration != widget.illustration ||
+        oldWidget.color != widget.color) {
+      illustrationFuture = renderIllustration(context);
     }
   }
 
@@ -132,7 +133,7 @@ class _UndrawState extends State<Undraw> {
       future: illustrationFuture,
       builder: (BuildContext context, snapshot) {
         if (snapshot.hasData) {
-          return Container(
+          return Padding(
             padding: widget.padding ?? EdgeInsets.all(16),
             child: SvgPicture.string(
               snapshot.data!,
