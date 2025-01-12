@@ -56,7 +56,7 @@ them one by one.
 ```yaml
 flutter:
   assets:
-    - packages/flutter_undraw/assets/undraw//
+    - packages/flutter_undraw/assets/undraw/
 ```
 
 ## License
